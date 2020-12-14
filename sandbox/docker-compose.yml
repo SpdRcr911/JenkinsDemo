@@ -1,0 +1,6 @@
+version: '3'
+services:
+  webapi:
+    image: sandbox_aspnetapp
+    ports:
+      - "8080:80"

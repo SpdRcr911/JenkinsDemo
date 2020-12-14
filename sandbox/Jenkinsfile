@@ -1,0 +1,47 @@
+pipeline {
+   agent {
+      label 'linuxdocker'
+   }
+
+   stages {
+      stage('Verify Branch') {
+         steps {
+            echo "Branch is $GIT_BRANCH"
+            echo "Workspace is $WORKSPACE"
+         }
+      }
+      stage('Docker Build') {
+         steps {
+            sh "docker build -t sandbox_aspnetapp ."
+         }
+      }
+      stage('Start test app') {
+         steps {
+            //sh "docker-compose up -d" // this doesn't work, but would be better than solution
+            sh "docker run -dt -p 8080:80 --name myapp sandbox_aspnetapp"
+         }
+         post {
+            success {
+               echo "App started successfully :)"
+            }
+            failure {
+               echo "App failed to start :("
+            }
+         }
+      }
+      stage('Test API Rest') {
+         steps {
+            sh 'newman run "./tests/Newman/Sandbox API Test Collection.postman_collection.json" -e "./tests/Newman/Sandbox API Test Environment - Dev.postman_environment.json" -r junit,html --reporter-junit-export var/reports/newman/junit/newman.xml --reporter-html-export var/reports/newman/html/index.html'
+
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'var/reports/newman/html', reportFiles: 'index.html', reportName: 'Newman API Test', reportTitles: ''])
+         }
+      }      
+      stage('Stop test app') {
+         steps {
+            // echo "docker-compose down" // this doesn't work, but would be better than solution
+            sh "docker stop myapp"
+            sh "docker rm myapp"
+         }
+      }
+   }
+}
