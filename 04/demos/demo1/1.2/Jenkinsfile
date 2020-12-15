@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            dir 'm4'
+            dir '04/demos'
         }
     }
     stages {
