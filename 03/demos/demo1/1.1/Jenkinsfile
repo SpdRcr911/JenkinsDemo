@@ -18,7 +18,8 @@ pipeline {
         stage('Build') {
             steps {
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
-              sh 'dotnet build -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ../../../../pi-psod/src/Pi.Web/Pi.Web.csproj'
+              sh 'pwd'
+              sh 'dotnet build -p:VersionPrefix="${VERSION}" --version-suffix "${VERSION_RC}" ./pi-psod/src/Pi.Web/Pi.Web.csproj'
             }
         }
         stage('Unit Test') {
