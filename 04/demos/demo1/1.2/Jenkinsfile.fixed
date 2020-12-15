@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            dir '04/demos'
+            dir 'sandbox'
             filename 'Dockerfile.sdk'
         }
     }
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'dotnet build "$WORKSPACE/pi-psod/src/Pi.Web/Pi.Web.csproj"'
+                sh 'dotnet build "$WORKSPACE/sandbox/src/Pi.Web/Pi.Web.csproj"'
             }
         }
         stage('Unit Test') {
