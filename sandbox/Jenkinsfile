@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'mcr.microsoft.com/dotnet/core/sdk:3.1.101'
+            image 'mcr.microsoft.com/dotnet/sdk:5.0'
         }
     }
 
@@ -25,7 +25,7 @@ pipeline {
       stage('Build') {
          steps {
             dir("$WORKSPACE") {
-               sh 'dotnet build "sandbox/src/webapi/Sandbox.WebApi.csproj"'
+               sh 'dotnet build "sandbox/src/webapi/Sandbox.Webapi.csproj"'
             }
          }
       }
