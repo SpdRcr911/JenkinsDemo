@@ -19,7 +19,7 @@ namespace Sandbox.Data.Services
             return person;
         }
 
-        public List<Person> GetAllPerson()
+        public List<Person> GetAllPersons()
         {
             var persons = personRepository.GetAll();
             return persons;

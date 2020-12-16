@@ -25,7 +25,7 @@ namespace Sandbox.Tests
         {
             mockPersonRepository.Setup(d => d.GetAll()).Returns((new Person[10]).ToList());
 
-            var persons = personService.GetAllPerson();
+            var persons = personService.GetAllPersons();
 
             Assert.That(persons, Has.Count.EqualTo(10));
         }

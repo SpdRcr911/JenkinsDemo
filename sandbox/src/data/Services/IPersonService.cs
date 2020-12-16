@@ -6,7 +6,7 @@ namespace Sandbox.Data.Services
 {
     public interface IPersonService
     {
-        List<Person> GetAllPerson();
+        List<Person> GetAllPersons();
         Person GetPerson(Guid guid);
     }
 }
