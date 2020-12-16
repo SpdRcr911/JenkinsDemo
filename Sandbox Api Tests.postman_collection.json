@@ -1,0 +1,465 @@
+{
+	"info": {
+		"_postman_id": "f6e891c7-d9b4-4447-936d-30a1e82f5ab5",
+		"name": "Sandbox Api Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/Person",
+			"item": [
+				{
+					"name": "When get all persons",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6dd9fec-ab4c-4457-9c16-0d26a31106ff",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Results are greater than 0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.length).to.gt(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Person",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Person"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"type\": \"laborum ex nostrud cillum\",\n \"title\": \"in esse Excepteur\",\n \"status\": 43755236,\n \"detail\": \"dolor in nulla culpa\",\n \"instance\": \"minim culpa\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"guid\": \"99be6f5e-fe37-d3b8-4eeb-5dfc1ea055ac\",\n  \"name\": \"in sed incididunt quis do\",\n  \"age\": 72953820,\n  \"address\": \"officia eu\"\n },\n {\n  \"guid\": \"4ac7e244-9344-1346-ba9d-157436286328\",\n  \"name\": \"dolore consequat elit amet aute\",\n  \"age\": 45629679,\n  \"address\": \"incididunt\"\n }\n]"
+						}
+					]
+				},
+				{
+					"name": "When get person with bad request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34bae915-d4b0-4fd0-96cf-1fd035c59815",
+								"exec": [
+									"pm.test(\"Status code is 400 Bad Request\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Person/:guid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Person",
+								":guid"
+							],
+							"variable": [
+								{
+									"key": "guid",
+									"value": "0",
+									"type": "string",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"guid\": \"7c83acdb-95f3-3e01-1046-c6da9646e0d2\",\n \"name\": \"culpa enim laboris ve\",\n \"age\": -8268531,\n \"address\": \"veniam dolor\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"type\": \"laborum ex nostrud cillum\",\n \"title\": \"in esse Excepteur\",\n \"status\": 43755236,\n \"detail\": \"dolor in nulla culpa\",\n \"instance\": \"minim culpa\"\n}"
+						}
+					]
+				},
+				{
+					"name": "When get person and not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6502bcf1-d04e-400c-b501-8ca6dc21ca70",
+								"exec": [
+									"pm.test(\"Status code is 404 Not Found\", function () {\r",
+									"    pm.response.to.be.notFound\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Person/:guid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Person",
+								":guid"
+							],
+							"variable": [
+								{
+									"description": "(Required) ",
+									"key": "guid",
+									"type": "string",
+									"value": "b4420648-5133-4aa3-bcc0-501d2be1e51c"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"guid\": \"7c83acdb-95f3-3e01-1046-c6da9646e0d2\",\n \"name\": \"culpa enim laboris ve\",\n \"age\": -8268531,\n \"address\": \"veniam dolor\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"type\": \"laborum ex nostrud cillum\",\n \"title\": \"in esse Excepteur\",\n \"status\": 43755236,\n \"detail\": \"dolor in nulla culpa\",\n \"instance\": \"minim culpa\"\n}"
+						}
+					]
+				},
+				{
+					"name": "When get person",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d44c10da-5417-4207-a5ef-250b56765f6b",
+								"exec": [
+									"pm.environment.set(\"uuid\", \"de45c46f-346e-4b96-8ae3-13d6ced0d7ef\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "61a0f87f-8139-40c4-bee9-ec965df0169b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"The right person is returned\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    let myGuid = pm.variables.get(\"uuid\");\r",
+									"    pm.expect(jsonData.guid).to.eql(myGuid);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Person/:guid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Person",
+								":guid"
+							],
+							"variable": [
+								{
+									"description": "(Required) ",
+									"key": "guid",
+									"type": "string",
+									"value": "{{uuid}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"type\": \"laborum ex nostrud cillum\",\n \"title\": \"in esse Excepteur\",\n \"status\": 43755236,\n \"detail\": \"dolor in nulla culpa\",\n \"instance\": \"minim culpa\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Person/:guid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Person",
+										":guid"
+									],
+									"variable": [
+										{
+											"key": "guid"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"guid\": \"7c83acdb-95f3-3e01-1046-c6da9646e0d2\",\n \"name\": \"culpa enim laboris ve\",\n \"age\": -8268531,\n \"address\": \"veniam dolor\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
