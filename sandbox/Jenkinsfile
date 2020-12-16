@@ -36,10 +36,10 @@ pipeline {
             }
          }
       }
-      stage('Public') {
+      stage('Publish') {
          steps {
             dir("$WORKSPACE") {
-               sh 'dotnet publish -c Release -o out "sandbox/src/webapi/Sandbox.WebApi.csproj"'
+               sh 'dotnet publish -c Release -o out "sandbox/src/webapi/Sandbox.Webapi.csproj"'
             }
          }
       }
