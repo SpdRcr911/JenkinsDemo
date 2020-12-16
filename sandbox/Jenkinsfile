@@ -36,6 +36,14 @@ pipeline {
             }
          }
       }
+      stage('Public') {
+         steps {
+            dir("$WORKSPACE") {
+               sh 'dotnet publish -c Release -o out "sandbox/src/webapi/Sandbox.WebApi.csproj"'
+            }
+         }
+      }
+      
       // stage('Smoke Test') {
       //    steps {
       //       sh 'dotnet "$WORKSPACE/m4/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll"'
