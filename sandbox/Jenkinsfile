@@ -43,35 +43,29 @@ pipeline {
                 }
             }
         }
-        
-        // stage('Smoke Test') {
-        //    steps {
-        //       sh 'dotnet "$WORKSPACE/m4/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll"'
-        //    }
-        // }
-
-
-
-
-        // stage('Docker Build') {
-        //    steps {
-        //       sh 'dotnet build "$WORKSPACE/m4/src/Pi.Web/Pi.Web.csproj"'
-        //    }
-        // }
-        // stage('Start test app') {
-        //    steps {
-        //       //sh "docker-compose up -d" // this doesn't work, but would be better than solution
-        //       sh "docker run -dt -p 8080:80 --name myapp sandbox_aspnetapp"
-        //    }
-        //    post {
-        //       success {
-        //          echo "App started successfully :)"
-        //       }
-        //       failure {
-        //          echo "App failed to start :("
-        //       }
-        //    }
-        // }
+        stage('Docker Build') {
+            steps {
+                script {
+                    image = docker.build("spdrcr911/sandbox-api", "--pull -f ./sandbox/Dockerfile")
+                }
+            }
+        }
+        stage('Start container') {
+            steps {
+                script {
+                    container = image.run()
+                    container.stop()
+                }
+            }
+            post {
+                success {
+                    echo "App started successfully :)"
+                }
+                failure {
+                    echo "App failed to start :("
+                }
+            }
+        }
         // stage('Test API Rest') {
         //    steps {
         //       sh 'newman run "./tests/Newman/Sandbox API Test Collection.postman_collection.json" -e "./tests/Newman/Sandbox API Test Environment - Dev.postman_environment.json" -r junit,html --reporter-junit-export var/reports/newman/junit/newman.xml --reporter-html-export var/reports/newman/html/index.html'
